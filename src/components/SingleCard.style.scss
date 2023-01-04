@@ -1,0 +1,33 @@
+.card {
+  position: relative;
+  img {
+    width: 150px;
+  }
+  // FRONT CARD
+  .front {
+    transform: rotateY(90deg);
+    position: absolute;
+    transition: all ease-in 0.2s;
+  }
+  // FRONT CARD flipped
+  .flipped {
+    .front {
+      transform: rotateY(0deg);
+      transition-delay: 0.2s;
+    }
+  }
+
+  // BACK CARD
+  .back {
+    transition: all ease-in 0.2s;
+    transition-delay: 0.2s;
+  }
+
+  // BACK CARD flipped
+  .flipped {
+    .back {
+      transform: rotateY(90deg);
+      transition-delay: 0s;
+    }
+  }
+}
