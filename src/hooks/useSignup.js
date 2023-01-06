@@ -1,7 +1,9 @@
 import { useAuthContext } from "./useAuthContext";
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
+import { db } from "../firebase/config";
+import { setDoc, doc } from "firebase/firestore";
+//collection, addDoc,
 import { useState, useEffect } from "react";
 
 export const useSignup = () => {
@@ -20,12 +22,26 @@ export const useSignup = () => {
         password
       );
 
+      // const docRef = await addDoc(collection(db, "players"), {
+      //   displayName: displayName,
+      //   score: 0,
+      // });
+
+      await setDoc(doc(db, "players", displayName), {
+        displayName: displayName,
+        score: 0,
+      });
+
       if (!response) {
         throw new Error("Could not complete auth");
       }
 
+      // if (!docRef) {
+      //   throw new Error("Could not write to collection");
+      // }
+
       //add displayName
-      await updateProfile(auth.currentUser, {displayName: displayName});
+      await updateProfile(auth.currentUser, { displayName: displayName });
 
       dispatch({ type: "LOGIN", payload: response.user });
 
